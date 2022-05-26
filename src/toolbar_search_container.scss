@@ -1,0 +1,47 @@
+.SearchIcon {
+    position: absolute;
+    width: 1%;
+    margin-top: 8px;
+    margin-left: 15px;
+    left: 0;
+    z-index: 3;
+  }
+  
+  .SearchIconChild {
+    display: none;
+  }
+  
+  #removeIcon {
+    width: 20px;
+    margin-top: -22px;
+    left: 0;
+    z-index: 3;
+  }
+  
+  
+  .Button {
+    position: relative;
+    background-color: #3A4345;
+    color: white;
+    width: 15%;
+    font-style: normal;
+    height: 34px;
+    border-radius: 5px;
+    font-family: 'Poppins';
+    font-style: normal;
+    text-align: center;
+    font-size: 20px;
+    margin-right: 5px;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  
+  .Button:hover {
+    background-color: #034E5E;
+  }
+  
+  .Button i {
+    left: 0;
+    bottom: 0;
+    position: absolute;
+  }
