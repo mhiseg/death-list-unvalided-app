@@ -4,6 +4,7 @@ import IconPlus from "@carbon/icons-react/es/add/24";
 import SearchIcon from "@carbon/icons-react/es/search/20";
 import { useRef } from "react";
 import { Icon } from "@iconify/react";
+import { useTranslation } from "react-i18next";
 
 
 export function SearchInput({ onChange, className }) {
@@ -12,6 +13,7 @@ export function SearchInput({ onChange, className }) {
     const [isActiveRemoveIcon, setActiveRemoveIcon] = useState(true);
     const [isClearInput, setActiveClearInput] = useState(true);
     const input = useRef(null)
+    const { t } = useTranslation();
 
     const toggleClass = (e) => {
 
@@ -54,7 +56,7 @@ export function SearchInput({ onChange, className }) {
         </i>
         <input ref={input} type="text" className={className} name="search"
             onChange={onChange} onInput={onInputChange}
-            placeholder="Search.." />
+            placeholder={t("Search", "Search...")} />
     </>
 
 }

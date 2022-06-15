@@ -8,60 +8,59 @@ import DeathList from "./deathList";
 
 
 const UnvalidedDeathList: React.FC = () => {
-  let tableTitle = 'Liste des morts non validés';
   const { t } = useTranslation();
- 
+
   let headers = [
     {
       key: 'No_dossier',
-      header: t('No dossier')
+      header: t('No_dossier','No dossier')
     },
     {
       key: 'firstName',
-      header: 'Nom'
+      header: t('firstName','Nom')
     },
     {
       key: 'lastName',
-      header: 'Prenom'
+      header: t('lastName','Prenom')
     },
     {
       key: 'birth',
-      header: 'Date de naisssance'
+      header: t('birth','Date de naisssance')
 
     },
     {
       key: 'gender',
-      header: 'sexe'
+      header: t('gender','Sexe')
     },
     {
       key: 'habitat',
-      header: 'Habitat'
+      header: t('habitat','habitat')
     },
     {
       key: 'residence',
-      header: 'Residence'
+      header: t('residence','residence')
     },
     {
       key: 'occupation',
-      header: 'Occupation'
+      header: t('occupation','occupation')
     },
     {
       key: 'etat_civil',
-      header: 'Etat civil'
+      header: t('etat_civil','etat civil')
     },
     {
       key: 'deathDay',
-      header: 'Date de déces'
+      header: t('deathDay','Date de mort')
     }
 
   ];
-    
+
   return (
     <div className={styles.container}>
 
       <section>
         <h5> {t('list label')}</h5>
-       <DeathList  headers={headers}/>
+        <DeathList headers={headers} />
       </section >
     </div >
   );

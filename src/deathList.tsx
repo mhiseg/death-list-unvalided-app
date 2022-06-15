@@ -14,6 +14,7 @@ import {
     Pagination
 } from 'carbon-components-react';
 import getPatients from "./getPatient";
+import { useTranslation } from "react-i18next";
 
 export interface DeathListProps {
     headers: { key: string; header: string; }[]
@@ -26,7 +27,7 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
     const [PaginationPageSize, PaginationPage] = [5, 1];
     const paginationPageSizes = [1, 5, 10, 20, 30, 40];
     const [[prev, next], setLink] = useState(['', '']);
-
+    const { t } = useTranslation();
     function onTableRowHandleClick(e, rowSelected) {
         rowsTable.forEach(row => {
             if (row.No_dossier == rowSelected.cells[0].value) {
@@ -87,7 +88,7 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
                                 <SearchInput
                                     className={styles['search-1']}
                                     onChange={onInputChange} />
-                                <Toolbar_Button onClickChange={''} label="Déclarer un mort" />
+                                <Toolbar_Button onClickChange={''} label={t('DeclareDeath','Déclarer un mort')} />
                                 
                             </div>
                         </div>
