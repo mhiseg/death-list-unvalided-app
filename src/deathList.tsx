@@ -33,7 +33,6 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
                 console.log(row)
             }
         })
-        // location.replace("./home") 
     }
 
     useEffect(function () {
@@ -89,6 +88,7 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
                                     className={styles['search-1']}
                                     onChange={onInputChange} />
                                 <Toolbar_Button onClickChange={''} label="Déclarer un mort" />
+                                
                             </div>
                         </div>
                         <TableContainer className={styles.table}>

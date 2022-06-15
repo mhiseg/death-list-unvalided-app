@@ -58,7 +58,7 @@ function setupOpenMRS() {
     pages: [
       {
         load: getAsyncLifecycle(() => import("./unvalided-deathList"), options),
-        route: "unvalidedDeathList", 
+        route: "death/unvalidedDeathList", 
       },
     ]
   };

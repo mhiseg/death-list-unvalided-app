@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import styles from "./toolbar_search_container.scss";
-import IconPlus from "@carbon/icons-react/es/add/20";
+import IconPlus from "@carbon/icons-react/es/add/24";
 import SearchIcon from "@carbon/icons-react/es/search/20";
-import RemoveIcon from "@carbon/icons-react/es/x-axis/20"
-import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
 import { useRef } from "react";
-import { Delete } from '@carbon/pictograms-react';
+import { Icon } from "@iconify/react";
 
 
 export function SearchInput({ onChange, className }) {
@@ -31,27 +28,28 @@ export function SearchInput({ onChange, className }) {
     const onInputChange = (e) => {
         if (input.current.value.trim().length == 0) {
             setActiveRemoveIcon(true);
-         setActiveSearchIcon(false);
-         setActiveClearInput(false);
-         }else{
-           setActiveRemoveIcon(false);
-           setActiveSearchIcon(true);
-           setActiveClearInput(false);
-         }
+            setActiveSearchIcon(false);
+            setActiveClearInput(false);
+        } else {
+            setActiveRemoveIcon(false);
+            setActiveSearchIcon(true);
+            setActiveClearInput(false);
+        }
     }
 
     return <>
         <i className={styles.SearchIcon} >
-          
+
             <SearchIcon
                 id="searchIcon"
                 className={isActiveSearchIcon ? styles["SearchIconChild"] : ''}
                 onClick={toggleClass}
             />
-            <Delete
+            <Icon
+                icon="gridicons:cross-small"
                 id={styles.removeIcon}
-                onClick={toggleClass} 
-                className={ isActiveRemoveIcon ? styles["SearchIconChild"] : '' }
+                className={isActiveRemoveIcon ? styles["SearchIconChild"] : ""}
+                onClick={toggleClass}
             />
         </i>
         <input ref={input} type="text" className={className} name="search"
@@ -73,7 +71,6 @@ export function Toolbar_search_container({ onInputChange }) {
                         </svg>
                     </div>
                 </div>
-
             </div>
         </div>
     )
@@ -81,7 +78,7 @@ export function Toolbar_search_container({ onInputChange }) {
 
 export function Toolbar_Button({ onClickChange, label }) {
     return <>
-        <button onClick={onClickChange} className={styles.Button}> <i><IconPlus /> </i> {label}</button>
+        <button onClick={onClickChange} className={styles.Button}> <i><IconPlus className={styles.buttonIcon} /> </i><i>{label}</i></button>
     </>
 
 }
