@@ -54,7 +54,7 @@ export function SearchInput({ onChange, className }) {
                 onClick={toggleClass}
             />
         </i>
-        <input ref={input} type="text" className={className} name="search"
+        <input ref={input} type="text" className={className} name="search" autoComplete="off"
             onChange={onChange} onInput={onInputChange}
             placeholder={t("Search", "Search...")} />
     </>

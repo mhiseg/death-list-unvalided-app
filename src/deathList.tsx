@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./unvalided-death.scss";
 import { SearchInput, Toolbar_Button } from "./toolbar_search_container";
 import { useState, useEffect } from "react";
+import getPatients from "./getPatient";
+import { useTranslation } from "react-i18next";
 import {
     DataTable,
     Table,
@@ -13,8 +15,7 @@ import {
     TableHead,
     Pagination
 } from 'carbon-components-react';
-import getPatients from "./getPatient";
-import { useTranslation } from "react-i18next";
+import { navigate, NavigateOptions } from "@openmrs/esm-framework";
 
 export interface DeathListProps {
     headers: { key: string; header: string; }[]
@@ -28,14 +29,16 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
     const paginationPageSizes = [1, 5, 10, 20, 30, 40];
     const [[prev, next], setLink] = useState(['', '']);
     const { t } = useTranslation();
+    const toDeclared: NavigateOptions = { to: window.spaBase + "/death/declare" };
+
     function onTableRowHandleClick(e, rowSelected) {
         rowsTable.forEach(row => {
+            const toValided: NavigateOptions = { to: window.spaBase + "/death/patient/validation/" + row.id };
             if (row.No_dossier == rowSelected.cells[0].value) {
-                console.log(row)
+                navigate(toValided)
             }
         })
     }
-
     useEffect(function () {
         changeRows(PageSize, 1);
     }, []);
@@ -87,9 +90,9 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
                             <div className={"bx--toolbar-content"}>
                                 <SearchInput
                                     className={styles['search-1']}
-                                    onChange={onInputChange} />
-                                <Toolbar_Button onClickChange={''} label={t('DeclareDeath','Déclarer un mort')} />
-                                
+                                    onChange={(e) => ((e.currentTarget.value.trim().length) > 0) && onInputChange(e)} />
+                                <Toolbar_Button onClickChange={(e)=>{navigate(toDeclared)} } label={t('DeclareDeath', 'Déclarer un mort')} />
+
                             </div>
                         </div>
                         <TableContainer className={styles.table}>
@@ -103,9 +106,9 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
                                         </TableHeader>
                                     ))}
                                 </TableHead>
-                                <TableBody>
+                                <TableBody className={styles.TableBody}>
                                     {rows.map((row) => (
-                                        <TableRow key={row.id}  {...getRowProps({ row })} onClick={e => { onTableRowHandleClick(e, row) }} >
+                                        <TableRow className={styles.TableRow} key={row.id}  {...getRowProps({ row })} onClick={e => { onTableRowHandleClick(e, row) }} >
                                             {row.cells.map(cell => (
                                                 <TableCell key={cell.id} children={cell.value} />
                                             ))}
@@ -126,7 +129,8 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
                                 pageSize={PaginationPageSize}
                                 pageSizes={paginationPageSizes}
                                 size="md"
-                                totalItems={TotalpageSize} />
+                                totalItems={TotalpageSize}
+                            />
                         </div>
                     </div>
                 </>

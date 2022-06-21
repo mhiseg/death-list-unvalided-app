@@ -2,11 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,500&display=swap');
 
-.container {
-  padding-top: 5em;
-  padding-left: 1em;
-  padding-right: 1em;
-}
 
 .TableContainer {
   padding-top: 5px;
@@ -15,24 +10,18 @@
 }
 
 
-.tableTitle {
-  width: 348px;
-  height: 29px;
-  top: 136px;
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 23px;
-  display: flex;
-  align-items: center;
-  color: rgba(0, 0, 0, 0.69);
-}
+
 
 .TableRowHeader {
   border: 2px solid #B1B1B1;
   border-width: 0px 1.1px 1.1px 1.1px;
 }
+
+.TableBody {
+  max-height: 60vh;
+  overflow: scroll;
+}
+
 
 
 .search-1 {
