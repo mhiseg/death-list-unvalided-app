@@ -1,6 +1,7 @@
 function getPatients(items) {
     let patients = [];
     items.entry.forEach(function (item, i) {
+        console.log(item)
         if (item.deceasedBoolean==true) {
         patients.push({
             'id': item?.resource?.id,
