@@ -28,7 +28,7 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
     const paginationPageSizes = [1, 5, 10, 20, 30, 40];
     const [[prev, next], setLink] = useState(['', '']);
     const { t } = useTranslation();
-    const toDeclared: NavigateOptions = { to: window.spaBase + "/death/declare" };
+    const toDeclared: NavigateOptions = { to: window.spaBase + "/death/search" };
 
     function onTableRowHandleClick(e, rowSelected) {
         rowsTable.forEach(row => {
@@ -65,9 +65,8 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
             .then(json => {
                 console.log(json);
                 setLink([json?.link[2]?.url, json?.link[1]?.url]);
-                setTotalPageSize(getPatients(json).length);
+                setTotalPageSize(json?.total);
                 setRows(getPatients(json));
-
             })
     }
 

@@ -1,10 +1,8 @@
 function getPatients(items) {
     let patients = [];
     items.entry.forEach(function (item, i) {
-        console.log(item)
-        if (item.deceasedBoolean==true) {
-        patients.push({
-            'id': item?.resource?.id,
+        patients.push( {
+            'id':item?.resource?.id,
             'No_dossier': item?.resource?.identifier?.[0]?.value,
             'firstName': item?.resource?.name[0]?.family,
             'lastName': item?.resource?.name[0]?.given[0],
@@ -15,10 +13,9 @@ function getPatients(items) {
             'occupation': '',
             'matrimonial': '',
             'deathDate': ''
-
-        });
-    }
+        
     });
-return patients;
+    });
+    return patients;
 } export default getPatients;
 
