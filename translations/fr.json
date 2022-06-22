@@ -1,17 +1,19 @@
-{   
-    "DeclareDeath":"Declarer un mort",
-     "list label": "Liste des morts non validés",
-    "No dossier": " Numero du dossier",
-    "Search":"Rechercher...",
-    "No_dossier":"Numero de Dossier",
-    "firstName":"Nom",
-    "lastName": "Prenom",
-    "birth":"Date de naissance",
-    "gender":"Sexe",
-    "habitat":"Habitat",
-    "occupation":"Occupation",
-    "etat_civil":"Etat civil",
-    "deathDay":"Date de mort",
-    "searchPatient":"Rechercher un patient",
- "New patient":"Nouveau patient"
-} 
+{
+  "DeclareDeath": "Declarer un mort",
+  "list label": "Liste des morts non validés",
+  "No dossier": " Numero du dossier",
+  "Search": "Rechercher...",
+  "No_dossier": "Numero de Dossier",
+  "firstName": "Nom",
+  "lastName": "Prenom",
+  "birth": "Date de naissance",
+  "gender": "Sexe",
+  "habitat": "Habitat",
+  "occupation": "Occupation",
+  "etat_civil": "Etat civil",
+  "deathDay": "Date de mort",
+  "searchPatient": "Rechercher un patient",
+  "New patient": "Nouveau patient",
+  "PreviousPage": "Page precedent",
+  "NextPage": "Page suivante"
+}

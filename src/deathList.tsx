@@ -1,9 +1,10 @@
 import React from "react";
 import styles from "./unvalided-death.scss";
-import { SearchInput, Toolbar_Button } from "./toolbar_search_container";
-import { useState, useEffect } from "react";
 import getPatients from "./getPatient";
 import { useTranslation } from "react-i18next";
+import { SearchInput, Toolbar_Button } from "./toolbar_search_container";
+import { useState, useEffect } from "react";
+import { navigate, NavigateOptions } from "@openmrs/esm-framework";
 import {
     DataTable,
     Table,
@@ -15,7 +16,6 @@ import {
     TableHead,
     Pagination
 } from 'carbon-components-react';
-import { navigate, NavigateOptions } from "@openmrs/esm-framework";
 
 export interface DeathListProps {
     headers: { key: string; header: string; }[]
@@ -25,7 +25,6 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
     const [rowsTable, setRows] = useState([]);
     const [TotalpageSize, setTotalPageSize] = useState(1);
     const [[PageSize, Page], setPaginationPageSize] = useState([5, 1]);
-    const [PaginationPageSize, PaginationPage] = [5, 1];
     const paginationPageSizes = [1, 5, 10, 20, 30, 40];
     const [[prev, next], setLink] = useState(['', '']);
     const { t } = useTranslation();
@@ -33,7 +32,7 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
 
     function onTableRowHandleClick(e, rowSelected) {
         rowsTable.forEach(row => {
-            const toValided: NavigateOptions = { to: window.spaBase + "/death/patient/validation/" + row.id };
+            const toValided: NavigateOptions = { to: window.spaBase + "/death/patient/validate/" + row.id };
             if (row.No_dossier == rowSelected.cells[0].value) {
                 navigate(toValided)
             }
@@ -45,6 +44,9 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
 
     function changeRows(pagesize, page) {
         let url;
+
+        console.log(page, " >", Page)
+
         if (((prev || next) == '') || (pagesize != PageSize)) {
             url = "/openmrs/ws/fhir2/R4/Patient?_count=" + pagesize + "&_getpagesoffset=" + page;
         }
@@ -61,12 +63,12 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
                 return response.json()
             })
             .then(json => {
+                console.log(json);
                 setLink([json?.link[2]?.url, json?.link[1]?.url]);
-                setTotalPageSize(json?.total);
+                setTotalPageSize(getPatients(json).length);
                 setRows(getPatients(json));
+
             })
-            .catch(error => {
-            });
     }
 
     function onPaginationChange(e) {
@@ -91,15 +93,13 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
                                 <SearchInput
                                     className={styles['search-1']}
                                     onChange={(e) => ((e.currentTarget.value.trim().length) > 0) && onInputChange(e)} />
-                                <Toolbar_Button onClickChange={(e)=>{navigate(toDeclared)} } label={t('DeclareDeath', 'Déclarer un mort')} />
-
+                                <Toolbar_Button onClickChange={(e) => { navigate(toDeclared) }} label={t('DeclareDeath')} />
                             </div>
                         </div>
                         <TableContainer className={styles.table}>
                             <Table
-                                {...getTableProps()} size="lg" >
+                                {...getTableProps()} size="md" >
                                 <TableHead className={styles.TableRowHeader} >
-
                                     {headers.map((header) => (
                                         <TableHeader key={header.key} {...getHeaderProps({ header, isSortable: true })}>
                                             {header.header}
@@ -113,6 +113,7 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
                                                 <TableCell key={cell.id} children={cell.value} />
                                             ))}
                                         </TableRow>
+
                                     ))}
                                 </TableBody>
                             </Table>
@@ -121,14 +122,14 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
                     <div>
                         <div>
                             <Pagination
-                                backwardText="Previous page"
-                                forwardText="Next page"
-                                itemsPerPageText="Show"
+                                backwardText={t("PreviousPage")}
+                                forwardText={t("NextPage")}
+                                itemsPerPageText={t("Show")}
                                 onChange={onPaginationChange}
-                                page={PaginationPage}
-                                pageSize={PaginationPageSize}
+                                page={Page}
+                                pageSize={PageSize}
                                 pageSizes={paginationPageSizes}
-                                size="md"
+                                size="sm"
                                 totalItems={TotalpageSize}
                             />
                         </div>

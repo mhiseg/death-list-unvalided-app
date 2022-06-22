@@ -1,16 +1,17 @@
 {
-  "Search":"Search...",
-  "DeclareDeath":"Declare a death",
+  "Search": "Search...",
+  "DeclareDeath": "Declare a death",
   "searchPatient": "Find a patient",
   "New patient": "New patient",
   "list label": "Death list unvalided",
-  "No_dossier":"No Dossier",
-  "firstName":"Firstname",
+  "No_dossier": "No Dossier",
+  "firstName": "Firstname",
   "lastName": "Lastname",
-  "birth":"Birthday",
-  "gender":"Gender",
-  "habitat":"Habitat",
-  "occupation":"Occupation",
-  "etat_civil":"Marital status",
-  "deathDay":"Death day"
+  "birth": "Birthday",
+  "gender": "Gender",
+  "habitat": "Habitat",
+  "occupation": "Occupation",
+  "etat_civil": "Marital status",
+  "deathDay": "Death day",
+  "PreviousPage": "Previous Page"
 }

@@ -45,7 +45,7 @@ const backendDependencies = {
  */
 
 function setupOpenMRS() {
-  const moduleName = "openmrs/mhiseg-death-list-unvalided-app";
+  const moduleName = "@openmrs/mhiseg-death-list-unvalided-app";
 
   const options = {
     featureName: "",
