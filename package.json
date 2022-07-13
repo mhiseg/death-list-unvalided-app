@@ -1,9 +1,9 @@
 {
-  "name": "@openmrs/mhiseg-death-list-unvalided-app",
-  "version": "3.0.0",
+  "name": "@mhiseg/mhiseg-list-unvalided-app",
+  "version": "0.0.1",
   "license": "MPL-2.0",
   "description": "A microfrontend template OpenMRS",
-  "browser": "dist/openmrs-mhiseg-death-list-unvalided-app.js",
+  "browser": "dist/mhiseg-death-list-unvalided-app.js",
   "main": "src/index.ts",
   "source": true,
   "scripts": {
