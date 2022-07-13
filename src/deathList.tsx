@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./unvalided-death.scss";
-import getPatients from "./getPatient";
 import { useTranslation } from "react-i18next";
 import { SearchInput, Toolbar_Button } from "./toolbar_search_container";
 import { useState, useEffect } from "react";
@@ -16,6 +15,7 @@ import {
     TableHead,
     Pagination
 } from 'carbon-components-react';
+import { getPatients } from "./getPatient";
 
 export interface DeathListProps {
     headers: { key: string; header: string; }[]
@@ -45,8 +45,6 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
     function changeRows(pagesize, page) {
         let url;
 
-        console.log(page, " >", Page)
-
         if (((prev || next) == '') || (pagesize != PageSize)) {
             url = "/openmrs/ws/fhir2/R4/Patient?_count=" + pagesize + "&_getpagesoffset=" + page;
         }
@@ -62,11 +60,13 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
             .then(response => {
                 return response.json()
             })
-            .then(json => {
-                console.log(json);
+            .then(async json => {
                 setLink([json?.link[2]?.url, json?.link[1]?.url]);
                 setTotalPageSize(json?.total);
-                setRows(getPatients(json));
+                getPatients(json).then(data => {
+                    console.log(data)
+                    setRows(data);
+                })
             })
     }
 

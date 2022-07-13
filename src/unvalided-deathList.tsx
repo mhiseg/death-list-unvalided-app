@@ -45,11 +45,11 @@ const UnvalidedDeathList: React.FC = () => {
       header: t('occupation', 'occupation')
     },
     {
-      key: 'etat_civil',
+      key: 'matrimonial',
       header: t('etat_civil', 'etat civil')
     },
     {
-      key: 'deathDay',
+      key: 'deathDate',
       header: t('deathDay', 'Date de mort')
     }
 
