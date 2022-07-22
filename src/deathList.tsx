@@ -15,17 +15,17 @@ import {
     TableHead,
     Pagination
 } from 'carbon-components-react';
-import { getAllPatientDeathPages, getPatients } from "./patient-ressource";
+import { getAllPatientDeathPages, getPatients, getSizePersonDeath } from "./patient-ressource";
 
 export interface DeathListProps {
     headers: { key: string; header: string; }[]
 }
 const DeathList: React.FC<DeathListProps> = ({ headers }) => {
-
     const [rowsTable, setRows] = useState([]);
     const [TotalpageSize, setTotalPageSize] = useState(1);
-    const [[PageSize, Page], setPaginationPageSize] = useState([5, 1]);
-    const paginationPageSizes = [1, 5, 10, 20, 30, 40];
+    const startIndex = 0;
+    const [[PageSize, Page], setPaginationPageSize] = useState([5, 0]);
+    const paginationPageSizes = [1, 2, 3, 4, 5, 6, 10, 20, 30, 40];
     const [[prev, next], setLink] = useState(['', '']);
     const { t } = useTranslation();
     const toDeclared: NavigateOptions = { to: window.spaBase + "/death/declare/patient" };
@@ -38,23 +38,20 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
             }
         })
     }
+
     useEffect(function () {
-        changeRows(PageSize, 1);
+        getSizePersonDeath().then(res => setTotalPageSize(res.data.results.length))
+        changeRows(5, 1);
     }, []);
 
     function changeRows(size, page) {
+        let start = ((page - 1) * size);
+        start =  start <= 1 ? 1 : start;
         setPaginationPageSize([size, page]);
-        getAllPatientDeathPages(size, page)
-            .then(response => {
-                return response.data
-            })
-            .then(async json => {
-                setLink([json?.link[2]?.url, json?.link[1]?.url]);
-                setTotalPageSize(json?.total);
-                getPatients(json).then(data => setRows(data))
-            })
+        getAllPatientDeathPages(size, start)
+            .then(response => response.data.results)
+            .then(async json => getPatients(json).then(data => setRows(data)))
     }
-
 
     return (
         <DataTable rows={rowsTable} headers={headers} useZebraStyles={true}  >
@@ -107,7 +104,7 @@ const DeathList: React.FC<DeathListProps> = ({ headers }) => {
                                 backwardText={t("PreviousPage")}
                                 forwardText={t("NextPage")}
                                 itemsPerPageText={t("Show")}
-                                onChange={(e)=> changeRows(e.pageSize, e.page)}
+                                onChange={(e) => changeRows(e.pageSize, e.page)}
                                 page={Page}
                                 pageSize={PageSize}
                                 pageSizes={paginationPageSizes}
